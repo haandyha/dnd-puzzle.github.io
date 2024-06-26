@@ -1,0 +1,235 @@
+:host {
+  .puzzle-container {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .clue {
+    img {
+      height: 20rem;
+      width: 30rem;
+    }
+  }
+
+  .levers-container {
+    height: 28rem;
+    width: 40rem;
+    background: url('../../../assets/images/panel-background.jpg') no-repeat center;
+    background-size: cover;
+
+    .arm {
+      background: #A1662F;
+      width: 80px;
+      height: 15px;
+      position: absolute;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-origin: left top;
+      transition: all .3s ease-in;
+
+      .handle {
+        display: block;
+        background: #ca1717;
+        width: 50px;
+        height: 20px;
+        position: absolute;
+        right: -35px;
+        top: -3px;
+      }
+    }
+
+    .bottom {
+      background: #111;
+      width: 40px;
+      height: 70px;
+      position: absolute;
+      border-radius: 10px;
+
+      .screw {
+        background: #A1662F;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        position: absolute;
+        top: 20px;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:before {
+          content: "";
+          background: #111;
+          width: 10px;
+          height: 10px;
+          display: block;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    #lever-1 {
+      position: relative;
+      cursor: pointer;
+
+      .bottom {
+        top: 18rem;
+      }
+
+      .pos-1 {
+        transform: rotate(-60deg);
+        top: 19.5rem;
+        right: 33.5rem;
+      }
+
+      .pos-2 {
+        transform: rotate(-25deg);
+        top: 19.7rem;
+        right: 33.2rem;
+
+      }
+
+      .pos-3 {
+        transform: rotate(20deg);
+        top: 20rem;
+        right: 33rem;
+      }
+
+      .pos-4 {
+        transform: rotate(60deg);
+        top: 20.3rem;
+        right: 32.8rem;
+      }
+    }
+
+    #lever-2 {
+      position: relative;
+      cursor: pointer;
+
+      .bottom {
+        left: 9rem;
+        top: 5rem;
+      }
+
+      .pos-1 {
+        transform: rotate(-60deg);
+        top: 6.5rem;
+        left: 10.5rem;
+      }
+
+      .pos-2 {
+        transform: rotate(-25deg);
+        top: 6.7rem;
+        left: 10.7rem;
+      }
+
+      .pos-3 {
+        transform: rotate(20deg);
+        top: 6.9rem;
+        left: 11rem;
+      }
+
+      .pos-4 {
+        transform: rotate(60deg);
+        top: 7.3rem;
+        left: 11.2rem;
+      }
+    }
+
+    #lever-3 {
+      position: relative;
+      cursor: pointer;
+
+      .arm {
+        transform-origin: right bottom;
+
+        .handle {
+          right: 68px;
+        }
+      }
+
+      .bottom {
+        right: 9rem;
+        top: 5rem;
+
+        .screw {
+          left: 0;
+        }
+      }
+
+      .pos-1 {
+        transform: rotate(60deg);
+        top: 6rem;
+        right: 11.2rem;
+      }
+
+      .pos-2 {
+        transform: rotate(25deg);
+        top: 6.5rem;
+        right: 11rem;
+      }
+
+      .pos-3 {
+        transform: rotate(-20deg);
+        top: 6.9rem;
+        right: 10.7rem;
+      }
+
+      .pos-4 {
+        transform: rotate(-60deg);
+        top: 6.7rem;
+        right: 10.3rem;
+      }
+    }
+
+    #lever-4 {
+      position: relative;
+      cursor: pointer;
+
+      .arm {
+        transform-origin: right bottom;
+
+        .handle {
+          right: 68px;
+        }
+      }
+
+      .bottom {
+        top: 18rem;
+        right: 0;
+
+        .screw {
+          left: 0;
+        }
+      }
+
+      .pos-1 {
+        transform: rotate(60deg);
+        top: 19rem;
+        right: 2.3rem;
+      }
+
+      .pos-2 {
+        transform: rotate(25deg);
+        top: 19.5rem;
+        right: 2rem;
+      }
+
+      .pos-3 {
+        transform: rotate(-20deg);
+        top: 19.9rem;
+        right: 1.8rem;
+      }
+
+      .pos-4 {
+        transform: rotate(-60deg);
+        top: 20rem;
+        right: 1.5rem;
+      }
+    }
+  }
+}

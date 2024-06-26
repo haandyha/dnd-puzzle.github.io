@@ -1,0 +1,20 @@
+<div class="container">
+  <h1 class="title">Buttons Puzzle</h1>
+  <a routerLink="/home">Return</a>
+  <h1 class="banner" *ngIf="displayBanner">Success</h1>
+  <div class="puzzle-container">
+    <div class="clue">
+      <img src="/assets/images/button-puzzle-door-marking.jpg" alt="" />
+    </div>
+    <div class="panel-container">
+      <div class="buttons-container">
+        <div *ngFor="let button of panelButtons; index as i">
+          <div
+            [ngClass]="button ? 'pressed' : 'button-input'"
+            (click)="toggleBtnStatus(i)"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

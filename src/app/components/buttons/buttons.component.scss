@@ -1,0 +1,63 @@
+:host{
+  .puzzle-container {
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .clue {
+    img {
+      height: 40rem;
+      width: 40rem;
+    }
+  }
+
+  .panel-container {
+    height: 40rem;
+    width: 40rem;
+    background: url("/assets/images/panel-background.jpg") no-repeat center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .buttons-container {
+      display: grid;
+      grid-template-columns: repeat(4, 5rem);
+      grid-gap: 3rem;
+      width: 30rem;
+      height: 30rem;
+      align-items: center;
+      justify-content: center;
+
+      .button-input {
+        width: 4rem;
+        height: 4rem;
+        background-color: orange;
+        -moz-box-shadow: 0px 1px 1px rgba(000,000,000,0.5),
+          inset 1px 2px 0px rgba(255,255,255,0.4);
+        -webkit-box-shadow: 0px 1px 1px rgba(000,000,000,0.5),
+          inset 1px 2px 0px rgba(255,255,255,0.4);
+        box-shadow:	7px 7px 7px 7px rgba(000,000,000,0.5),
+          inset 1px 2px 0px rgba(255,255,255,0.4);
+        border: 1px solid #965F06;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .pressed {
+        width: 4rem;
+        height: 4rem;
+        background: orange;
+        box-shadow: inset 2px 2px 4px 5px rgba(0,0,0,0.3);
+        border: 1px solid #965F06;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
