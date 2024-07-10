@@ -1,0 +1,147 @@
+.panel-container {
+  height: 45rem;
+  width: 45rem;
+  background: url("../../../assets/images/panel-background.jpg") no-repeat center fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .clue {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .VI {
+    transform: rotate(-45deg);
+  }
+
+  .VIII {
+    transform: rotate(45deg);
+  }
+
+  .V {
+    transform: rotate(135deg);
+  }
+
+  .horizontal-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .triangle-left {
+    border-top: 2.8rem solid transparent;
+    border-right: 10rem solid rgb(255, 255, 255);
+    border-bottom: 2.8rem solid transparent;
+  }
+
+  .triangle-right {
+    border-top: 2.8rem solid transparent;
+    border-left: 10rem solid rgb(255, 255, 255);
+    border-bottom: 2.8rem solid transparent;
+  }
+
+  .triangle-up {
+    border-left: 2.8rem solid transparent;
+    border-right: 2.8rem solid transparent;
+    border-bottom: 10rem solid rgb(255, 255, 255);
+  }
+
+  .triangle-down {
+    border-left: 2.8rem solid transparent;
+    border-right: 2.8rem solid transparent;
+    border-top: 10rem solid rgb(255, 255, 255);
+  }
+
+  .slot {
+    width: 5.5rem;
+    height: 5.5rem;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #slot4 {
+    transform: rotate(-90deg);
+  }
+
+  #slot2 {
+    transform: rotate(90deg);
+  }
+
+  #slot3 {
+    transform: rotate(180deg);
+  }
+
+  .hide {
+    visibility: hidden;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .switch {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background-color: #383838;
+  }
+
+  .rotating-wheel {
+    width: 28rem;
+    height: 28rem;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    border-radius: 50%;
+
+    .dial {
+      width: 100%;
+      height: 100%;
+      background-color: #035063;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      cursor: grab;
+
+      .num-switch {
+        width: 5.5rem;
+        height: 5.5rem;
+        align-self: flex-start;
+        position: absolute;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #switch2 {
+        right: 0;
+        top: 11rem;
+        transform: rotate(90deg);
+      }
+
+      #switch3 {
+        bottom: 0;
+      }
+
+      #switch4 {
+        left: 0;
+        top: 11rem;
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+
+
