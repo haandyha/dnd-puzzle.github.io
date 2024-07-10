@@ -26,7 +26,17 @@
         </div>
         <div class="triangle-down"></div>
       </div>
-      <div class="rotating-wheel" #wheel (mousedown)="onMouseDown($event)">
+      <div
+        class="rotating-wheel"
+        #wheel
+        (mousedown)="onMouseDown($event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp($event)"
+        (mouseleave)="onMouseUp($event)"
+        (touchstart)="onMouseDown($event)"
+        (touchmove)="onMouseMove($event)"
+        (touchend)="onMouseUp($event)"
+      >
         <div class="dial">
           <div
             id="switch1"

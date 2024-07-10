@@ -102,6 +102,7 @@
     overflow: hidden;
     user-select: none;
     border-radius: 50%;
+    touch-action: none;
 
     .dial {
       width: 100%;
