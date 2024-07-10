@@ -1,0 +1,93 @@
+<div class="container">
+  <h1 class="title">Number Wheel</h1>
+  <a routerLink="/home">Return</a>
+  <h1 class="banner" *ngIf="displayBanner">Success</h1>
+  <div class="panel-container">
+    <div class="row">
+      <div class="VI">
+        <img src="./assets/images/roman-VI.png" alt="VI" class="clue" />
+      </div>
+      <div class="horizontal-line" (click)="resetSlot(slot1)">
+        <div class="triangle-left"></div>
+        <div id="slot1" #slot1 class="slot">
+          <img src="{{ getImgSrc(slot1Val) }}" alt="" class="switch" />
+        </div>
+        <div class="triangle-right"></div>
+      </div>
+      <div class="clue VIII">
+        <img src="./assets/images/roman-VIII.png" alt="VIII" class="clue" />
+      </div>
+    </div>
+    <div class="row">
+      <div (click)="resetSlot(slot4)">
+        <div class="triangle-up"></div>
+        <div id="slot4" #slot4 class="slot">
+          <img src="{{ getImgSrc(slot4Val) }}" alt="" class="switch" />
+        </div>
+        <div class="triangle-down"></div>
+      </div>
+      <div class="rotating-wheel" #wheel (mousedown)="onMouseDown($event)">
+        <div class="dial">
+          <div
+            id="switch1"
+            class="num-switch"
+            [ngClass]="{ hide: hideNumSwitch1 }"
+            #numSwitch1
+            (click)="handleSwitchSelection(numSwitch1)"
+          >
+            <img src="./assets/images/roman-I.png" alt="I" class="switch" />
+          </div>
+          <div
+            id="switch2"
+            class="num-switch"
+            [ngClass]="{ hide: hideNumSwitch2 }"
+            #numSwitch2
+            (click)="handleSwitchSelection(numSwitch2)"
+          >
+            <img src="./assets/images/roman-II.png" alt="II" class="switch" />
+          </div>
+          <div
+            id="switch3"
+            class="num-switch"
+            [ngClass]="{ hide: hideNumSwitch3 }"
+            #numSwitch3
+            (click)="handleSwitchSelection(numSwitch3)"
+          >
+            <img src="./assets/images/roman-III.png" alt="III" class="switch" />
+          </div>
+          <div
+            id="switch4"
+            class="num-switch"
+            [ngClass]="{ hide: hideNumSwitch4 }"
+            #numSwitch4
+            (click)="handleSwitchSelection(numSwitch4)"
+          >
+            <img src="./assets/images/roman-V.png" alt="V" class="switch" />
+          </div>
+        </div>
+      </div>
+      <div (click)="resetSlot(slot2)">
+        <div class="triangle-up"></div>
+        <div id="slot2" #slot2 class="slot">
+          <img src="{{ getImgSrc(slot2Val) }}" alt="" class="switch" />
+        </div>
+        <div class="triangle-down"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="VIII">
+        <img src="./assets/images/roman-III.png" alt="III" class="clue" />
+      </div>
+      <div class="horizontal-line" (click)="resetSlot(slot3)">
+        <div class="triangle-left"></div>
+        <div id="slot3" #slot3 class="slot">
+          <img src="{{ getImgSrc(slot3Val) }}" alt="" class="switch" />
+        </div>
+        <div class="triangle-right"></div>
+      </div>
+      <div class="V">
+        <img src="./assets/images/roman-V.png" alt="V" class="clue" />
+      </div>
+    </div>
+  </div>
+</div>
