@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './number-wheel.component.scss'
 })
 export class NumberWheelComponent {
-  @ViewChild('wheel', { static: true }) wheel: ElementRef | undefined;
+  @ViewChild('wheel', { static: true }) wheel!: ElementRef;
   switch1Val = 1;
   switch2Val = 2;
   switch3Val = 3;
@@ -23,46 +23,69 @@ export class NumberWheelComponent {
   slot2Val = 0;
   slot3Val = 0;
   slot4Val = 0;
-  private isDragging: boolean = false;
-  private startAngle: number = 0;
-  private currentRotation: number = 0;
+  private isDragging = false;
+  private startAngle = 0;
+  private currentRotation = 0;
   displayBanner = false;
 
   constructor(private renderer: Renderer2) { }
 
-  onMouseDown(event: MouseEvent): void {
+  onMouseDown(event: MouseEvent | TouchEvent) {
     this.isDragging = true;
-    this.startAngle = this.calculateAngle(event.clientX, event.clientY);
-    this.renderer.addClass(document.body, 'grabbing');
+    if('clientX' in event && 'clientY' in event) {
+      this.startAngle = this.calculateAngle(event.clientX, event.clientY);
+    } else {
+      this.startAngle = this.calculateAngle(event.touches[0].clientX, event.touches[0].clientY);
+    }
+  }
 
-    this.renderer.listen('document', 'mousemove', (moveEvent: MouseEvent) => {
-      if (this.isDragging) {
-        const newAngle = this.calculateAngle(moveEvent.clientX, moveEvent.clientY);
-        const rotation = this.currentRotation + (newAngle - this.startAngle);
-        this.rotateWheel(rotation);
+  onMouseMove(event: MouseEvent | TouchEvent) {
+    if (this.isDragging) {
+      let newAngle = 0;
+      if('clientX' in event && 'clientY' in event) {
+        newAngle = this.calculateAngle(event.clientX, event.clientY);
+      } else {
+        newAngle = this.calculateAngle(event.touches[0].clientX, event.touches[0].clientY);
       }
-    });
+      const rotation = this.currentRotation + (newAngle - this.startAngle);
+      this.rotateWheel(rotation);
+    }
+  }
 
-    this.renderer.listen('document', 'mouseup', () => {
-      this.isDragging = false;
+  onMouseUp(event: MouseEvent | TouchEvent) {
+    this.isDragging = false;
+    if('clientX' in event && 'clientY' in event) {
       this.currentRotation += this.calculateAngle(event.clientX, event.clientY) - this.startAngle;
-      this.renderer.removeClass(document.body, 'grabbing');
-    });
+    } else {
+      const latestTouch = event.changedTouches.length-1;
+      const savedTouch = event.changedTouches[latestTouch];
+      this.currentRotation += this.calculateAngle(savedTouch.clientX, savedTouch.clientY) - this.startAngle;
+    }
   }
 
   private calculateAngle(clientX: number, clientY: number): number {
-    const wheelCenter = this.getWheelCenter();
-    return Math.atan2(clientY - wheelCenter.y, clientX - wheelCenter.x);
+    const wheelCenter = this.getCenter(this.wheel);
+    let angle = Math.atan2(clientY - wheelCenter.y, clientX - wheelCenter.x) * (180 / Math.PI);
+    if (angle < 0) {
+      angle = 360 + angle;
+    }
+    return angle
   }
 
   private rotateWheel(rotation: number): void {
     if (this.wheel) {
-      this.renderer.setStyle(this.wheel.nativeElement, 'transform', `rotate(${rotation}rad)`);
+      this.renderer.setStyle(this.wheel.nativeElement, 'transform', `rotate(${rotation}deg)`);
     }
   }
 
-  getWheelCenter(): { x:number, y:number } {
-    const rect = this.wheel?.nativeElement.getBoundingClientRect();
+  getCenter(elRef: ElementRef | HTMLDivElement): { x:number, y:number } {
+    let rect;
+    if('nativeElement' in elRef) {
+      rect = elRef.nativeElement.getBoundingClientRect();
+    } else {
+      rect = elRef.getBoundingClientRect();
+    }
+
     return {
       x: rect!.left + rect!.width / 2,
       y: rect!.top + rect!.height / 2
@@ -70,8 +93,8 @@ export class NumberWheelComponent {
   }
 
   handleSwitchSelection(el: HTMLDivElement) {
-    const selectedSwitchVal = this.getSwitchVal(el.id);
-    const angle = this.getSwitchAngle(el);
+    const switchCenter = this.getCenter(el);
+    const angle = this.calculateAngle(switchCenter.x, switchCenter.y);
     if(angle > 260 && angle < 280) {
       this.updateSlotStatus(1, el.id);
     } else if((angle >= 0 && angle <10) || (angle > 350 && angle <=360)) {
@@ -92,19 +115,6 @@ export class NumberWheelComponent {
       case('switch4'): return this.switch4Val;
       default: return 0;
     }
-  }
-
-  getSwitchAngle(switchElemRef: HTMLDivElement): number {
-    const wheelCenter = this.getWheelCenter();
-    const childRect = switchElemRef.getBoundingClientRect();
-    const childCenterX = childRect.left + childRect.width / 2;
-    const childCenterY = childRect.top + childRect.height / 2;
-    let angle = Math.atan2(childCenterY - wheelCenter.y, childCenterX - wheelCenter.x);
-    angle = angle * (180 / Math.PI);
-    if (angle < 0) {
-      angle = 360 + angle;
-    }
-    return angle
   }
 
   updateSlotStatus(slot: number, selectedSwitch: string) {
